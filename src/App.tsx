@@ -6,13 +6,14 @@ import axios from 'axios';
 import { ALL_COUNTRIES } from 'config';
 import { List } from 'components/List';
 import { Card } from 'components/Card';
+import { flagsCountriesAPI, ResponseGetFlagsType } from 'api/flagsCountriesAPI';
 
 type InfoItemType = {
   title: string,
   description:string
 }
 
-type countryInfoType = {
+export type countryInfoType = {
   img:string,
   name:string,
   info: InfoItemType[]
@@ -20,12 +21,15 @@ type countryInfoType = {
 
 const App = () => {
 
-  const [countries, setCountries] = useState( [] )
-
+  const [countries, setCountries] = useState<ResponseGetFlagsType[]>( [] )
+  console.log(countries)
   useEffect( () => {
-    axios.get( ALL_COUNTRIES )
-      .then( ( { data } ) => setCountries( data ) )
-  } )
+    // axios.get( ALL_COUNTRIES )
+    //   .then( ( { data } ) => setCountries( data ) )
+    flagsCountriesAPI.getFlags()
+      .then((data)=>setCountries(data))
+  },[countries] )
+
   return (
     <>
       <MainHeader/>
@@ -33,14 +37,14 @@ const App = () => {
         <Controls/>
         <List>
           {
-            countries.map( (country:countryInfoType) => {
+            countries.map( country => {
                 const countryInfo = {
                   img: country.flags.png,
                   name: country.name,
                   info: [
                     {
                       title: 'Population',
-                      description: country.population.toLocalString()
+                      description: country.population.toLocaleString()
                     },
                     {
                       title: 'Region',
@@ -53,7 +57,7 @@ const App = () => {
                   ]
                 }
                 return (
-                  <Card key={country.name}{...countryInfo}/>
+                  <Card key={country.name} countryInfo={countryInfo} />
                 )
               }
             )
