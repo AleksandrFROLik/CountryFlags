@@ -7,62 +7,34 @@ import { ALL_COUNTRIES } from 'config';
 import { List } from 'components/List';
 import { Card } from 'components/Card';
 import { flagsCountriesAPI, ResponseGetFlagsType } from 'api/flagsCountriesAPI';
+import {  Route, Routes } from 'react-router-dom';
+import { HomePage } from 'pages/HomePage';
+import { Details } from 'pages/Details';
+import { NotFound } from 'pages/NotFound';
 
 type InfoItemType = {
   title: string,
-  description:string
+  description: string
 }
 
 export type countryInfoType = {
-  img:string,
-  name:string,
+  img: string,
+  name: string,
   info: InfoItemType[]
 }
 
 const App = () => {
 
-  const [countries, setCountries] = useState<ResponseGetFlagsType[]>( [] )
-  console.log(countries)
-  useEffect( () => {
-    // axios.get( ALL_COUNTRIES )
-    //   .then( ( { data } ) => setCountries( data ) )
-    flagsCountriesAPI.getFlags()
-      .then((data)=>setCountries(data))
-  },[countries] )
 
   return (
     <>
       <MainHeader/>
       <Main>
-        <Controls/>
-        <List>
-          {
-            countries.map( country => {
-                const countryInfo = {
-                  img: country.flags.png,
-                  name: country.name,
-                  info: [
-                    {
-                      title: 'Population',
-                      description: country.population.toLocaleString()
-                    },
-                    {
-                      title: 'Region',
-                      description: country.region
-                    },
-                    {
-                      title: 'Capital',
-                      description: country.capital
-                    }
-                  ]
-                }
-                return (
-                  <Card key={country.name} countryInfo={countryInfo} />
-                )
-              }
-            )
-          }
-        </List>
+        <Routes>
+          <Route  path='*' element={<HomePage/>}/>
+          <Route path='/country/:name' element={<Details/>}/>
+          <Route element={<NotFound/>}/>
+        </Routes>
       </Main>
     </>
   )

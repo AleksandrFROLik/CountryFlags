@@ -5,9 +5,29 @@ export const instance = axios.create( {
   withCredentials: true,
 } )
 
+// export const flagsCountriesAPI = {
+//   getFlags() {
+//     return instance.get<AxiosResponse<AxiosResponse,ResponseGetFlagsType[]>,ResponseGetFlagsType[]>( '/all?fields=name,capital,flags,population,region' )
+//   }
+// }
+//
+//
+// export type ResponseGetFlagsType = {
+//   name: string,
+//   capital: string,
+//   subregion: string,
+//   region: string,
+//   population: number,
+//   area: number,
+//   flags: {
+//     svg: string,
+//     png: string,
+//   },
+//   flag: string,
+// }
 export const flagsCountriesAPI = {
   getFlags() {
-    return instance.get<AxiosResponse<AxiosResponse,ResponseGetFlagsType[]>,ResponseGetFlagsType[]>( '/all?fields=name,capital,flags,population,region' )
+    return instance.get( '/all?fields=name,capital,flags,population,region' )
   }
 }
 
@@ -21,7 +41,7 @@ export type ResponseGetFlagsType = {
   area: number,
   flags: {
     svg: string,
-    png: string
+    png: string,
   },
   flag: string,
 }
