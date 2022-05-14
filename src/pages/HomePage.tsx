@@ -1,26 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { flagsCountriesAPI, ResponseGetFlagsType } from 'api/flagsCountriesAPI';
-import { Controls } from 'components/Controls';
+import { Controls, RegionType } from 'components/Controls';
 import { List } from 'components/List';
 import { Card } from 'components/Card';
+import { useNavigate } from 'react-router-dom';
 
+type HomePageType = {
+  countries: ResponseGetFlagsType[]
+  setCountries: ( countries: ResponseGetFlagsType[] ) => void
+}
 
-export const HomePage = () => {
-  const [countries, setCountries] = useState<ResponseGetFlagsType[]>( [] )
+export const HomePage = ( { countries, setCountries }: HomePageType ) => {
+  const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[]>( countries )
+  const navigate = useNavigate()
 
   useEffect( () => {
-    flagsCountriesAPI.getFlags()
-      .then( ( data ) => setCountries( data.data ) )
-
+    if (!countries.length) {
+      flagsCountriesAPI.getFlags()
+        .then( ( data ) => {
+          setCountries( data.data )
+          setFilteredCountries(data.data)
+        } )
+    }
   }, [] )
-  console.log( countries )
 
+  const handleSearch = ( search: string, region: RegionType | null ) => {
+    let data = [...countries];
+
+    if (region) {
+      data = data.filter( c => c.region.includes( region.value ) )
+    }
+    if (search) {
+      data = data.filter( c => c.name.toLowerCase().includes( search.toLowerCase() ) )
+    }
+    setFilteredCountries(data)
+  }
+
+  const navigateToDetails = ( name: string ) => {
+    navigate( `/country/${name}` )
+  };
 
   return (
     <>
-      <Controls/>
+      <Controls onSearch={handleSearch}/>
       <List>
-        {countries.map( country => {
+        {filteredCountries.map( country => {
             const countryInfo = {
               img: country.flags.png,
               name: country.name,
@@ -39,7 +63,7 @@ export const HomePage = () => {
                 }
               ]
             }
-            return <Card key={country.name} countryInfo={countryInfo}/>
+            return <Card key={country.name} countryInfo={countryInfo} handleOnClick={navigateToDetails}/>
           }
         )
         }

@@ -1,16 +1,11 @@
 import { MainHeader } from 'components/MainHeader';
 import { Main } from 'components/Main';
-import { Controls } from 'components/Controls';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { ALL_COUNTRIES } from 'config';
-import { List } from 'components/List';
-import { Card } from 'components/Card';
-import { flagsCountriesAPI, ResponseGetFlagsType } from 'api/flagsCountriesAPI';
-import {  Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { HomePage } from 'pages/HomePage';
 import { Details } from 'pages/Details';
 import { NotFound } from 'pages/NotFound';
+import { useEffect, useState } from 'react';
+import { flagsCountriesAPI, ResponseGetFlagsType } from 'api/flagsCountriesAPI';
 
 type InfoItemType = {
   title: string,
@@ -24,14 +19,14 @@ export type countryInfoType = {
 }
 
 const App = () => {
-
+  const [countries, setCountries] = useState<ResponseGetFlagsType[]>( [] )
 
   return (
     <>
       <MainHeader/>
       <Main>
         <Routes>
-          <Route  path='*' element={<HomePage/>}/>
+          <Route  path='*' element={<HomePage countries={countries} setCountries={setCountries}/>}/>
           <Route path='/country/:name' element={<Details/>}/>
           <Route element={<NotFound/>}/>
         </Routes>
