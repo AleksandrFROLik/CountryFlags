@@ -1,13 +1,38 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { IoArrowBack } from 'react-icons/io5'
+import { searchByCountry } from 'config';
+import axios from 'axios';
+import { Button } from 'components/Button';
+import { DetailItem } from 'components/DetailItem';
+import { ResponseCountryType } from 'api/flagsCountriesAPI';
 
 export const Details = () => {
+  const [country, setCountry] = useState<ResponseCountryType | null>( null )
+
+  const navigate = useNavigate()
   const params = useParams<'name'>()
   const name = params.name
 
+  useEffect( () => {
+    axios.get( searchByCountry( name ) )
+      .then( ( data ) => {
+        setCountry( data.data[0] )
+        console.log(data.data)
+      } )
+
+  }, [name] )
+
+  const handleOnClick = () => {
+    navigate( '/' )
+  };
+
   return (
     <div>
-      <h1>{name}</h1>
+      <Button onClick={handleOnClick}>
+        <IoArrowBack/> Back
+      </Button>
+      {country &&  <DetailItem country={country}/>}
     </div>
   );
 };
