@@ -133,5 +133,6 @@ export const DetailItem = ( { country }: DetailItemType ) => {
         </Meta>
       </div>
     </Wrapper>
+    <ItemImage/>
   )
 }
