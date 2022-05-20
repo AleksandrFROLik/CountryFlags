@@ -24,15 +24,6 @@ export const HomePage = ( { countries, setCountries }: HomePageType ) => {
     }
   }, [] )
 
-  useEffect( () => {
-    if (!countries.length) {
-      flagsCountriesAPI.getFlags()
-        .then( ( data ) => {
-          setCountries( data.data )
-          setFilteredCountries(data.data)
-        } )
-    }
-  }, [] )
 
   const handleSearch = ( search: string, region: RegionType | null ) => {
     let data = [...countries];
