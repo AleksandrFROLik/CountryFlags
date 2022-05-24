@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { ResponseCountryType } from 'api/flagsCountriesAPI';
+import { flagsCountriesAPI, ResponseCountryType } from 'api/flagsCountriesAPI';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { filterByCode } from 'config';
+import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -47,6 +51,7 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   line-height: 1.8;
+
   & > b {
     font-weight: var(--fw-bold);
   }
@@ -58,9 +63,11 @@ const Meta = styled.div`
   gap: 1.5rem;
   flex-direction: column;
   align-items: flex-start;
+
   & > b {
     font-weight: var(--fw-bold);
   }
+
   @media (min-width: 767px) {
     flex-direction: row;
     align-items: center;
@@ -85,6 +92,15 @@ type DetailItemType = {
 }
 
 export const DetailItem = ( { country }: DetailItemType ) => {
+
+  const [neighbors, setNeighbors] = useState<string[]>([])
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if(country?.borders?.length)
+    axios.get<Array<ResponseCountryType>>(filterByCode(country?.borders))
+      .then(( data ) => setNeighbors(data.data.map( country => country.name)))
+  }, [])
   return (
 
     <Wrapper>
@@ -111,23 +127,26 @@ export const DetailItem = ( { country }: DetailItemType ) => {
           </List>
           <List>
             <ListItem>
-              <b>TopLevel Domain</b> {country?.topLevelDomain.map( d => ( <span key={d}>{d}</span> ) )}
+              <b>TopLevel Domain</b> {country?.topLevelDomain.map(
+              d => (<span key={d}>{d}</span>))}
             </ListItem>
             <ListItem>
-              <b>Currency</b> {country?.currencies.map( c => ( <span key={c.code}>{c.name}</span> ) )}
+              <b>Currency</b> {country?.currencies.map(
+              c => (<span key={c.code}>{c.name}</span>))}
             </ListItem>
             <ListItem>
-              <b>Languages</b> {country?.languages.map( l => ( <span key={l.name}>{l.name}</span> ) )}
+              <b>Languages</b> {country?.languages.map(
+              l => (<span key={l.name}>{l.name}</span>))}
             </ListItem>
           </List>
         </ListGroup>
         <Meta>
           <b>Border Countries</b>
           {!country?.borders?.length ? (
-            <span>There is not border countrues</span>
+            <span>There is not border countries</span>
           ) : (
             <TagGroup>
-              {country?.borders?.map( border => ( <Tag key={border}>{border}</Tag> ) )}
+              {neighbors && neighbors.map(neighbor => (<Tag key={neighbor} onClick={()=> navigate(`/country/${neighbor}`)}>{neighbor}</Tag>))}
             </TagGroup>
           )}
         </Meta>

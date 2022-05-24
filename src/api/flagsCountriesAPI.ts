@@ -13,7 +13,7 @@ export const instance = axios.create( {
 // string, }, flag: string, }
 export const flagsCountriesAPI = {
   getFlags() {
-    return instance.get( '/all?fields=name,capital,flags,population,region' )
+    return instance.get<Array<ResponseGetFlagsType>>( '/all?fields=name,capital,flags,population,region' )
   }
 }
 
