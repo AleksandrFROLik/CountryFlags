@@ -1,5 +1,5 @@
 import { Search } from 'components/Search';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CustomSelect } from 'components/CustomSelect';
 import styled from 'styled-components';
 
@@ -39,6 +39,9 @@ export const Controls = ( { onSearch }: ControlsType ) => {
     onSearch( search, region )
   }, [search, region] )
 
+
+  // @ts-ignore
+  // @ts-ignore
   return (
     <Wrapper>
       <Search search={search} setSearch={setSearch}/>

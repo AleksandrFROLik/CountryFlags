@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { countryInfoType } from 'App';
-import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.article`
   border-radius: var(--radii);
@@ -49,22 +48,22 @@ const CardListItem = styled.li`
 
 type CardType = {
   countryInfo: countryInfoType
-  handleOnClick: (name:string)=>void
+  handleOnClick: ( name: string ) => void
 }
 
 export const Card = ( { countryInfo, handleOnClick }: CardType ) => {
 
   return (
-    <Wrapper onClick={()=>handleOnClick(countryInfo.name)}>
+    <Wrapper onClick={() => handleOnClick(countryInfo.name)}>
       <CardImage src={countryInfo.img} alt={countryInfo.name}/>
       <CardBody>
         <CardTitle>{countryInfo.name}</CardTitle>
         <CardList>
-          {countryInfo.info.map( info => (
+          {countryInfo.info.map(info => (
             <CardListItem key={info.title}>
               <b>{info.title}:</b>{info.description}
             </CardListItem>
-          ) )}
+          ))}
         </CardList>
       </CardBody>
     </Wrapper>

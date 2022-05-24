@@ -36,7 +36,7 @@ export const Search = ( { search, setSearch }: SearchType ) => {
   return (
     <InputContainer>
       <IoSearch/>
-      <Input value={search} onChange={( e ) => setSearch( e.currentTarget.value )}/>
+      <Input value={search} onChange={( e ) => setSearch(e.currentTarget.value)}/>
     </InputContainer>
   );
 };

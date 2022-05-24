@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { flagsCountriesAPI, ResponseCountryType } from 'api/flagsCountriesAPI';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+import { ResponseCountryType } from 'api/flagsCountriesAPI';
 import { filterByCode } from 'config';
 import { useNavigate } from 'react-router-dom';
 
@@ -97,9 +97,9 @@ export const DetailItem = ( { country }: DetailItemType ) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(country?.borders?.length)
-    axios.get<Array<ResponseCountryType>>(filterByCode(country?.borders))
-      .then(( data ) => setNeighbors(data.data.map( country => country.name)))
+    if (country?.borders?.length)
+      axios.get<Array<ResponseCountryType>>(filterByCode(country?.borders))
+        .then(( data ) => setNeighbors(data.data.map(country => country.name)))
   }, [])
   return (
 
@@ -146,7 +146,9 @@ export const DetailItem = ( { country }: DetailItemType ) => {
             <span>There is not border countries</span>
           ) : (
             <TagGroup>
-              {neighbors && neighbors.map(neighbor => (<Tag key={neighbor} onClick={()=> navigate(`/country/${neighbor}`)}>{neighbor}</Tag>))}
+              {neighbors && neighbors.map(neighbor => (<Tag key={neighbor}
+                                                            onClick={() => navigate(
+                                                              `/country/${neighbor}`)}>{neighbor}</Tag>))}
             </TagGroup>
           )}
         </Meta>

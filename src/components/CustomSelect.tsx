@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import Select from 'react-select';
 
 
-export const CustomSelect = styled( Select ).attrs( {
+export const CustomSelect = styled(Select).attrs({
   styles: {
-    control: ( provided ) => ( {
+    control: ( provided ) => ({
       ...provided,
       backgroundColor: 'var(--colors-ui-base)',
       color: 'var(--colors-text)',
@@ -12,9 +12,9 @@ export const CustomSelect = styled( Select ).attrs( {
       border: 'none',
       boxShadow: 'var(--shadow)',
       height: '50px',
-    } ),
+    }),
 
-    option: ( provided, state ) => ( {
+    option: ( provided, state ) => ({
       ...provided,
       cursor: 'pointer',
       color: 'var(--color-text)',
@@ -22,9 +22,9 @@ export const CustomSelect = styled( Select ).attrs( {
         ? 'var(--colors-bg)'
         : 'var(--colors-ui-base)',
 
-    } ),
+    }),
   }
-} )`
+})`
   width: 200px;
   border-radius: var(--radii);
   font-family: var(--family);
@@ -33,6 +33,7 @@ export const CustomSelect = styled( Select ).attrs( {
   & > * {
     box-shadow: var(--shadow);
   }
+
   & input {
     padding-left: 0.25rem;
   }
@@ -40,7 +41,10 @@ export const CustomSelect = styled( Select ).attrs( {
   & * {
     color: var(--colors-text) !important;
   }
+
   & > div[id] {
     background-color: var(--colors--base);
   }
 `;
+
+
