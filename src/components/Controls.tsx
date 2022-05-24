@@ -39,9 +39,6 @@ export const Controls = ( { onSearch }: ControlsType ) => {
     onSearch( search, region )
   }, [search, region] )
 
-
-  // @ts-ignore
-  // @ts-ignore
   return (
     <Wrapper>
       <Search search={search} setSearch={setSearch}/>

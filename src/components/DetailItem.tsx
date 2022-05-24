@@ -100,7 +100,7 @@ export const DetailItem = ( { country }: DetailItemType ) => {
     if (country?.borders?.length)
       axios.get<Array<ResponseCountryType>>(filterByCode(country?.borders))
         .then(( data ) => setNeighbors(data.data.map(country => country.name)))
-  }, [])
+  }, [country?.borders])
   return (
 
     <Wrapper>

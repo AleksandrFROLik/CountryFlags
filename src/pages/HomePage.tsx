@@ -24,7 +24,7 @@ export const HomePage = ( { countries, setCountries }: HomePageType ) => {
           setFilteredCountries(data.data)
         })
     }
-  }, [])
+  }, [countries])
 
 
   const handleSearch = ( search: string, region: RegionType | null ) => {

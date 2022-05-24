@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Container } from 'components/Container';
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -37,17 +37,23 @@ const ModeSwitcher = styled.div`
 export const MainHeader = () => {
 
   const [theme, setTheme] = useState( 'light' );
+
+  const navigate = useNavigate()
   const toggleTheme = () => setTheme( theme === 'light' ? 'dark' : 'light' );
 
   useEffect( () => {
     document.body.setAttribute( 'data-theme', theme )
   }, [theme] );
 
+  const backToMain = () => {
+    navigate('/')
+  }
+
   return (
     <HeaderEl>
       <Container>
         <Wrapper>
-          <Title>Where is the world?</Title>
+          <Title onClick={backToMain}>Where is the world?</Title>
           <ModeSwitcher onClick={toggleTheme}>
             {theme === 'light' && <IoMoonOutline/>}
             {theme === 'dark' && <IoMoon size="14px"/>}
