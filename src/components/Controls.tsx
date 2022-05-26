@@ -37,7 +37,7 @@ export const Controls = ( { onSearch }: ControlsType ) => {
 
   useEffect( () => {
     onSearch( search, region )
-  }, [search, region] )
+  }, [search, region, onSearch] )
 
   return (
     <Wrapper>
