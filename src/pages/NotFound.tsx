@@ -3,7 +3,7 @@
 export const NotFound = () => {
   return (
     <div>
-      This Page doesn't exist
+      <h1>This Page doesn't exist</h1>
     </div>
   );
 };
