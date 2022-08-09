@@ -4,7 +4,7 @@ import Select from 'react-select';
 
 export const CustomSelect = styled(Select).attrs({
   styles: {
-    control: ( provided ) => ({
+    control: (provided) => ({
       ...provided,
       backgroundColor: 'var(--colors-ui-base)',
       color: 'var(--colors-text)',
@@ -14,7 +14,7 @@ export const CustomSelect = styled(Select).attrs({
       height: '50px',
     }),
 
-    option: ( provided, state ) => ({
+    option: (provided, state) => ({
       ...provided,
       cursor: 'pointer',
       color: 'var(--color-text)',

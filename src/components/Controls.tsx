@@ -4,11 +4,11 @@ import { CustomSelect } from 'components/CustomSelect';
 import styled from 'styled-components';
 
 const options = [
-  { value: 'Africa', label: 'Africa' },
-  { value: 'America', label: 'America' },
-  { value: 'Asia', label: 'Asia' },
-  { value: 'Europe', label: 'Europe' },
-  { value: 'Oceania', label: 'Oceania' },
+  {value: 'Africa', label: 'Africa'},
+  {value: 'America', label: 'America'},
+  {value: 'Asia', label: 'Asia'},
+  {value: 'Europe', label: 'Europe'},
+  {value: 'Oceania', label: 'Oceania'},
 ]
 const Wrapper = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 `;
 
 type ControlsType = {
-  onSearch: ( search: string, region: RegionType | null ) => void
+  onSearch: (search: string, region: RegionType | null) => void
 }
 
 export type RegionType = {
@@ -31,13 +31,13 @@ export type RegionType = {
   label: string
 }
 
-export const Controls = ( { onSearch }: ControlsType ) => {
-  const [search, setSearch] = useState<string>( '' )
-  const [region, setRegion] = useState<RegionType | null>( null )
+export const Controls = ({onSearch}: ControlsType) => {
+  const [search, setSearch] = useState<string>('')
+  const [region, setRegion] = useState<RegionType | null>(null)
 
-  useEffect( () => {
-    onSearch( search, region )
-  }, [search, region, onSearch] )
+  useEffect(() => {
+    onSearch(search, region)
+  }, [search, region, onSearch])
 
   return (
     <Wrapper>

@@ -7,27 +7,26 @@ import { Card } from 'components/Card';
 
 type HomePageType = {
   countries: ResponseGetFlagsType[]
-  setCountries: ( countries: ResponseGetFlagsType[] ) => void
+  setCountries: (countries: ResponseGetFlagsType[]) => void
 }
 
-export const HomePage = ( { countries, setCountries }: HomePageType ) => {
+export const HomePage = ({countries, setCountries}: HomePageType) => {
 
-  const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[]>(
-    countries)
+  const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[]>(countries)
   const navigate = useNavigate()
 
   useEffect(() => {
     if (!countries.length) {
       flagsCountriesAPI.getFlags()
-        .then(( data ) => {
-          setCountries(data.data)
-          setFilteredCountries(data.data)
-        })
+                       .then((data) => {
+                         setCountries(data.data)
+                         setFilteredCountries(data.data)
+                       })
     }
   }, [countries.length, setCountries])
 
 
-  const handleSearch = ( search: string, region: RegionType | null ) => {
+  const handleSearch = (search: string, region: RegionType | null) => {
     let data = [...countries];
 
     if (region) {
@@ -39,7 +38,7 @@ export const HomePage = ( { countries, setCountries }: HomePageType ) => {
     setFilteredCountries(data)
   }
 
-  const navigateToDetails = ( name: string ) => {
+  const navigateToDetails = (name: string) => {
     navigate(`/country/${name}`)
   };
 

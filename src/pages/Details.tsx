@@ -15,6 +15,7 @@ export const Details = () => {
   const name = params.name
 
   useEffect(() => {
+    console.log('Details')
     axios.get(searchByCountry(name))
       .then(( data ) => {
         setCountry(data.data[0])

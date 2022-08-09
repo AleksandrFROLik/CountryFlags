@@ -48,10 +48,10 @@ const CardListItem = styled.li`
 
 type CardType = {
   countryInfo: countryInfoType
-  handleOnClick: ( name: string ) => void
+  handleOnClick: (name: string) => void
 }
 
-export const Card = ( { countryInfo, handleOnClick }: CardType ) => {
+export const Card = ({countryInfo, handleOnClick}: CardType) => {
 
   return (
     <Wrapper onClick={() => handleOnClick(countryInfo.name)}>

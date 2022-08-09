@@ -91,7 +91,7 @@ type DetailItemType = {
   country: ResponseCountryType | null
 }
 
-export const DetailItem = ( { country }: DetailItemType ) => {
+export const DetailItem = ({country}: DetailItemType) => {
 
   const [neighbors, setNeighbors] = useState<string[]>([])
   const navigate = useNavigate()
@@ -99,10 +99,10 @@ export const DetailItem = ( { country }: DetailItemType ) => {
   useEffect(() => {
     if (country?.borders?.length)
       axios.get<Array<ResponseCountryType>>(filterByCode(country?.borders))
-        .then(( data ) => setNeighbors(data.data.map(country => country.name)))
+           .then((data) => setNeighbors(data.data.map(country => country.name)))
   }, [country?.borders])
-  return (
 
+  return (
     <Wrapper>
       <ItemImage src={country?.flag}/>
       <div>
@@ -128,15 +128,15 @@ export const DetailItem = ( { country }: DetailItemType ) => {
           <List>
             <ListItem>
               <b>TopLevel Domain</b> {country?.topLevelDomain.map(
-              d => (<span key={d}>{d}</span>))}
+              domain => (<span key={domain}>{domain}</span>))}
             </ListItem>
             <ListItem>
               <b>Currency</b> {country?.currencies.map(
-              c => (<span key={c.code}>{c.name}</span>))}
+              currency => (<span key={currency.code}>{currency.name}</span>))}
             </ListItem>
             <ListItem>
               <b>Languages</b> {country?.languages.map(
-              l => (<span key={l.name}>{l.name}</span>))}
+              language => (<span key={language.name}>{language.name}</span>))}
             </ListItem>
           </List>
         </ListGroup>
@@ -146,14 +146,15 @@ export const DetailItem = ( { country }: DetailItemType ) => {
             <span>There is not border countries</span>
           ) : (
             <TagGroup>
-              {neighbors && neighbors.map(neighbor => (<Tag key={neighbor}
-                                                            onClick={() => navigate(
-                                                              `/country/${neighbor}`)}>{neighbor}</Tag>))}
+              {neighbors && neighbors.map(neighbor => (
+                <Tag key={neighbor}
+                     onClick={() => navigate(`/country/${neighbor}`)}>
+                  {neighbor}
+                </Tag>))}
             </TagGroup>
           )}
         </Meta>
       </div>
     </Wrapper>
-
   )
 }
