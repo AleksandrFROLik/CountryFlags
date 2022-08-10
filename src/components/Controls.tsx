@@ -39,6 +39,8 @@ export const Controls = ({onSearch}: ControlsType) => {
     onSearch(search, region)
   }, [search, region, onSearch])
 
+  const handleOnChange = (region:RegionType | null) => setRegion(region)
+
   return (
     <Wrapper>
       <Search search={search} setSearch={setSearch}/>
@@ -47,7 +49,7 @@ export const Controls = ({onSearch}: ControlsType) => {
                     isClearable
                     isSearchable={false}
                     value={region}
-                    onChange={setRegion}
+                    onChange={()=>handleOnChange(region)}
       />
     </Wrapper>
   );

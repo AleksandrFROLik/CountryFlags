@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { flagsCountriesAPI, ResponseGetFlagsType } from 'api/flagsCountriesAPI';
 import { Controls, RegionType } from 'components/Controls';
@@ -10,7 +10,7 @@ type HomePageType = {
   setCountries: (countries: ResponseGetFlagsType[]) => void
 }
 
-export const HomePage = ({countries, setCountries}: HomePageType) => {
+export const HomePage = React.memo(({countries, setCountries}: HomePageType) => {
 
   const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[]>(countries)
   const navigate = useNavigate()
@@ -74,4 +74,4 @@ export const HomePage = ({countries, setCountries}: HomePageType) => {
       </List>
     </>
   );
-};
+});
