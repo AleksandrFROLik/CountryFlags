@@ -8,6 +8,7 @@ import { DetailItem } from 'components/DetailItem';
 import { ResponseCountryType } from 'api/flagsCountriesAPI';
 
 export const Details = () => {
+
   const [country, setCountry] = useState<ResponseCountryType | null>(null)
 
   const navigate = useNavigate()
@@ -15,18 +16,15 @@ export const Details = () => {
   const name = params.name
 
   useEffect(() => {
-    console.log('Details')
+
     axios.get(searchByCountry(name))
       .then(( data ) => {
         setCountry(data.data[0])
-        console.log(data.data)
       })
-
   }, [name])
 
-  const handleOnClick = () => {
-    navigate('/')
-  };
+  const handleOnClick = () => navigate('/')
+
 
   return (
     <div>

@@ -39,7 +39,10 @@ export const Controls = ({onSearch}: ControlsType) => {
     onSearch(search, region)
   }, [search, region, onSearch])
 
-  const handleOnChange = (region:RegionType | null) => setRegion(region)
+  const handleOnChange = (event:any) => {
+    console.dir(event)
+    setRegion(event)
+  }
 
   return (
     <Wrapper>
@@ -49,7 +52,7 @@ export const Controls = ({onSearch}: ControlsType) => {
                     isClearable
                     isSearchable={false}
                     value={region}
-                    onChange={()=>handleOnChange(region)}
+                    onChange={(event)=>handleOnChange(event)}
       />
     </Wrapper>
   );

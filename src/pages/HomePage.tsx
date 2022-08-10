@@ -23,7 +23,7 @@ export const HomePage = React.memo(({countries, setCountries}: HomePageType) => 
                          setFilteredCountries(data.data)
                        })
     }
-  }, [countries.length, setCountries])
+  }, [countries.length])
 
 
   const handleSearch = (search: string, region: RegionType | null) => {
