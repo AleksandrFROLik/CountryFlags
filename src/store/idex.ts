@@ -1,7 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import flagReducer from './slices/flagSlice'
 
 const rootReducer = combineReducers({
-
+  flag: flagReducer
 })
 
 export function setupStore() {
