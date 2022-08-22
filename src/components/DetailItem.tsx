@@ -96,11 +96,11 @@ export const DetailItem = ({country}: DetailItemType) => {
   const [neighbors, setNeighbors] = useState<string[]>([])
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (country?.borders?.length)
-      axios.get<Array<ResponseCountryType>>(filterByCode(country?.borders))
-           .then((data) => setNeighbors(data.data.map(country => country.name)))
-  }, [country?.borders])
+  // useEffect(() => {
+  //   if (country?.borders?.length)
+  //     axios.get<Array<ResponseCountryType>>(filterByCode(country?.borders))
+  //          .then((data) => setNeighbors(data.data.map(country => country.name)))
+  // }, [country?.borders])
 
   return (
     <Wrapper>

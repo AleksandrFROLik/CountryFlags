@@ -15,13 +15,13 @@ export const Details = () => {
   const params = useParams<'name'>()
   const name = params.name
 
-  useEffect(() => {
-
-    axios.get(searchByCountry(name))
-      .then(( data ) => {
-        setCountry(data.data[0])
-      })
-  }, [name])
+  // useEffect(() => {
+  //
+  //   axios.get(searchByCountry(name))
+  //     .then(( data ) => {
+  //       setCountry(data.data[0])
+  //     })
+  // }, [name])
 
   const handleOnClick = () => navigate('/')
 

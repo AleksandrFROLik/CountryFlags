@@ -35,9 +35,9 @@ export const Controls = ({onSearch}: ControlsType) => {
   const [search, setSearch] = useState<string>('')
   const [region, setRegion] = useState<RegionType | null>(null)
 
-  useEffect(() => {
-    onSearch(search, region)
-  }, [search, region, onSearch])
+  // useEffect(() => {
+  //   onSearch(search, region)
+  // }, [search, region, onSearch])
 
   const handleOnChange = (event:any) => {
     console.dir(event)

@@ -4,26 +4,33 @@ import { flagsCountriesAPI, ResponseGetFlagsType } from 'api/flagsCountriesAPI';
 import { Controls, RegionType } from 'components/Controls';
 import { List } from 'components/List';
 import { Card } from 'components/Card';
+import { useSearchFlagsQuery } from '../store/flags.api.ts/flags.api';
 
 type HomePageType = {
   countries: ResponseGetFlagsType[]
-  setCountries: (countries: ResponseGetFlagsType[]) => void
+  setCountries: (countries: ResponseGetFlagsType[] ) => void
 }
 
 export const HomePage = React.memo(({countries, setCountries}: HomePageType) => {
 
-  const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[]>(countries)
+  const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[] >(countries)
   const navigate = useNavigate()
 
+  //console.log(filteredCountries)
+
+  // useEffect(() => {
+  //   if (!countries.length) {
+  //     flagsCountriesAPI.getFlags()
+  //                      .then((data) => {
+  //                        setCountries(data.data)
+  //                        setFilteredCountries(data.data)
+  //                      })
+  //   }
+  // }, [countries.length])
   useEffect(() => {
-    if (!countries.length) {
-      flagsCountriesAPI.getFlags()
-                       .then((data) => {
-                         setCountries(data.data)
-                         setFilteredCountries(data.data)
-                       })
-    }
-  }, [countries.length])
+    console.log('useEffect')
+    setFilteredCountries(countries)
+  },[countries])
 
 
   const handleSearch = (search: string, region: RegionType | null) => {
