@@ -18,19 +18,19 @@ export const HomePage = React.memo(({countries, setCountries}: HomePageType) => 
 
   //console.log(filteredCountries)
 
-  // useEffect(() => {
-  //   if (!countries.length) {
-  //     flagsCountriesAPI.getFlags()
-  //                      .then((data) => {
-  //                        setCountries(data.data)
-  //                        setFilteredCountries(data.data)
-  //                      })
-  //   }
-  // }, [countries.length])
   useEffect(() => {
-    console.log('useEffect')
-    setFilteredCountries(countries)
-  },[countries])
+    if (!countries.length) {
+      flagsCountriesAPI.getFlags()
+                       .then((data) => {
+                         setCountries(data.data)
+                         setFilteredCountries(data.data)
+                       })
+    }
+  }, [countries.length])
+  // useEffect(() => {
+  //   console.log('useEffect')
+  //   setFilteredCountries(countries)
+  // },[countries])
 
 
   const handleSearch = (search: string, region: RegionType | null) => {
