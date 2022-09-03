@@ -16,8 +16,6 @@ export const HomePage = React.memo(({countries, setCountries}: HomePageType) => 
   const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[] >(countries)
   const navigate = useNavigate()
 
-  //console.log(filteredCountries)
-
   useEffect(() => {
     if (!countries.length) {
       flagsCountriesAPI.getFlags()
