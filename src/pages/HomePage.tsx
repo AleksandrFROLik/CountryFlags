@@ -8,12 +8,12 @@ import { useSearchFlagsQuery } from '../store/flags.api.ts/flags.api';
 
 type HomePageType = {
   countries: ResponseGetFlagsType[]
-  setCountries: (countries: ResponseGetFlagsType[] ) => void
+  setCountries: (countries: ResponseGetFlagsType[]) => void
 }
 
 export const HomePage = React.memo(({countries, setCountries}: HomePageType) => {
 
-  const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[] >(countries)
+  const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[]>(countries)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -25,6 +25,7 @@ export const HomePage = React.memo(({countries, setCountries}: HomePageType) => 
                        })
     }
   }, [countries.length])
+
   // useEffect(() => {
   //   console.log('useEffect')
   //   setFilteredCountries(countries)
@@ -43,9 +44,7 @@ export const HomePage = React.memo(({countries, setCountries}: HomePageType) => 
     setFilteredCountries(data)
   }
 
-  const navigateToDetails = (name: string) => {
-    navigate(`/country/${name}`)
-  };
+  const navigateToDetails = (name: string) =>  navigate(`/country/${name}`)
 
   return (
     <>
