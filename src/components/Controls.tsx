@@ -31,18 +31,16 @@ export type RegionType = {
   label: string
 }
 
-export const Controls = ({onSearch}: ControlsType) => {
+export const Controls = React.memo(({onSearch}: ControlsType) => {
+
   const [search, setSearch] = useState<string>('')
   const [region, setRegion] = useState<RegionType | null>(null)
 
-  // useEffect(() => {
-  //   onSearch(search, region)
-  // }, [search, region, onSearch])
+   useEffect(() => {
+     onSearch(search, region)
+   }, [search, region, onSearch])
 
-  const handleOnChange = (event:any) => {
-    console.dir(event)
-    setRegion(event)
-  }
+  const handleOnChange = (event:any) => setRegion(event)
 
   return (
     <Wrapper>
@@ -56,5 +54,5 @@ export const Controls = ({onSearch}: ControlsType) => {
       />
     </Wrapper>
   );
-};
+});
 

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { flagsCountriesAPI, ResponseGetFlagsType } from 'api/flagsCountriesAPI';
 import { Controls, RegionType } from 'components/Controls';
 import { List } from 'components/List';
 import { Card } from 'components/Card';
-import { useSearchFlagsQuery } from '../store/flags.api.ts/flags.api';
 
 type HomePageType = {
   countries: ResponseGetFlagsType[]
@@ -26,25 +25,17 @@ export const HomePage = React.memo(({countries, setCountries}: HomePageType) => 
     }
   }, [countries.length])
 
-  // useEffect(() => {
-  //   console.log('useEffect')
-  //   setFilteredCountries(countries)
-  // },[countries])
 
-
-  const handleSearch = (search: string, region: RegionType | null) => {
+  const handleSearch = useCallback((search: string, region: RegionType | null) => {
     let data = [...countries];
 
-    if (region) {
-      data = data.filter(c => c.region.includes(region.value))
-    }
-    if (search) {
-      data = data.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))
-    }
-    setFilteredCountries(data)
-  }
+    if (region) data = data.filter(c => c.region.includes(region.value))
+    if (search) data = data.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))
 
-  const navigateToDetails = (name: string) =>  navigate(`/country/${name}`)
+    setFilteredCountries(data)
+  },[setFilteredCountries])
+
+  const navigateToDetails = (name: string) => navigate(`/country/${name}`)
 
   return (
     <>

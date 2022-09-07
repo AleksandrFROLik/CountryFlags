@@ -6,7 +6,7 @@ import { Main } from 'components/Main';
 import { HomePage } from 'pages/HomePage';
 import { Details } from 'pages/Details';
 import { NotFound } from 'pages/NotFound';
-import { useSearchFlagsQuery } from './store/flags.api.ts/flags.api';
+
 
 type InfoItemType = {
   title: string,
@@ -22,14 +22,13 @@ export type countryInfoType = {
 const App = () => {
   const [countries, setCountries] = useState<ResponseGetFlagsType[] >([])
 
-  const {isLoading, isError, data} = useSearchFlagsQuery([])
   return (
     <>
       <MainHeader/>
       <Main>
         <Routes>
           <Route path="/"
-                 element={<HomePage countries={data ? data : []} setCountries={setCountries}/>}/>
+                 element={<HomePage countries={countries} setCountries={setCountries}/>}/>
           <Route path="/country/:name" element={<Details/>}/>
           <Route element={<NotFound/>}/>
         </Routes>

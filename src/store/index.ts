@@ -1,9 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { flagsApi } from './flags.api.ts/flags.api';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import flagSlices from './slices/flagSlices';
 
-export const store = configureStore({
-  reducer: {
-    [flagsApi.reducerPath]: flagsApi.reducer
-  },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(flagsApi.middleware)
+const rootReducer = combineReducers({
+ reducer: flagSlices
 })
+
+export function setupStore() {
+  return configureStore({
+    reducer: rootReducer
+  })
+}
+export const store = setupStore()
+
+export type RootStateType = ReturnType<typeof rootReducer>
+export type AppStoreType = ReturnType<typeof setupStore>
+export type AppDispatch = AppStoreType['dispatch']
