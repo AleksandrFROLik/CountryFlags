@@ -33,7 +33,7 @@ export const HomePage = React.memo(({countries, setCountries}: HomePageType) => 
     if (search) data = data.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))
 
     setFilteredCountries(data)
-  },[setFilteredCountries])
+  },[setFilteredCountries, countries])
 
   const navigateToDetails = (name: string) => navigate(`/country/${name}`)
 
