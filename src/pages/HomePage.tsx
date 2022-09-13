@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { flagsCountriesAPI, ResponseGetFlagsType } from 'api/flagsCountriesAPI';
+import { flagsCountriesAPI } from 'api/flagsCountriesAPI';
 import { Controls, RegionType } from 'components/Controls';
 import { List } from 'components/List';
 import { Card } from 'components/Card';
+import { ResponseGetFlagsType } from '../models/models';
 
 type HomePageType = {
   countries: ResponseGetFlagsType[]

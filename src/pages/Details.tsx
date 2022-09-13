@@ -5,7 +5,7 @@ import { IoArrowBack } from 'react-icons/io5'
 import { searchByCountry } from 'config';
 import { Button } from 'components/Button';
 import { DetailItem } from 'components/DetailItem';
-import { ResponseCountryType } from 'api/flagsCountriesAPI';
+import { ResponseCountryType } from '../models/models';
 
 export const Details = React.memo(() => {
 

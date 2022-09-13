@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ResponseGetFlagsType } from 'api/flagsCountriesAPI';
 import { MainHeader } from 'components/MainHeader';
 import { Main } from 'components/Main';
 import { HomePage } from 'pages/HomePage';
 import { Details } from 'pages/Details';
 import { NotFound } from 'pages/NotFound';
+import { ResponseGetFlagsType } from './models/models';
 
 
 type InfoItemType = {

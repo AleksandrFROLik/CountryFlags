@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { ResponseCountryType } from 'api/flagsCountriesAPI';
 import { filterByCode } from 'config';
 import { useNavigate } from 'react-router-dom';
+import { ResponseCountryType } from '../models/models';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -96,11 +96,11 @@ export const DetailItem = ({country}: DetailItemType) => {
   const [neighbors, setNeighbors] = useState<string[]>([])
   const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   if (country?.borders?.length)
-  //     axios.get<Array<ResponseCountryType>>(filterByCode(country?.borders))
-  //          .then((data) => setNeighbors(data.data.map(country => country.name)))
-  // }, [country?.borders])
+  useEffect(() => {
+    if (country?.borders?.length)
+      axios.get<Array<ResponseCountryType>>(filterByCode(country?.borders))
+           .then((data) => setNeighbors(data.data.map(country => country.name)))
+  }, [country?.borders])
 
   return (
     <Wrapper>
