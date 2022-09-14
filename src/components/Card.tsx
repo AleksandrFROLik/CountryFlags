@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { countryInfoType } from 'App';
+import { countryInfoType } from '../models/models';
+
 
 const Wrapper = styled.article`
   border-radius: var(--radii);

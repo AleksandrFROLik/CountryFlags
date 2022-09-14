@@ -38,3 +38,14 @@ type CurrenciesType = {
   name: string,
   symbol: string
 }
+
+type InfoItemType = {
+  title: string,
+  description: string
+}
+
+export type countryInfoType = {
+  img: string,
+  name: string,
+  info: InfoItemType[]
+}

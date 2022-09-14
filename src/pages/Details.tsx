@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { IoArrowBack } from 'react-icons/io5'
-import { searchByCountry } from 'config';
 import { Button } from 'components/Button';
 import { DetailItem } from 'components/DetailItem';
-import { ResponseCountryType } from '../models/models';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { searchByCountryAction } from '../store/actions/searchByCountryAction';
 
 export const Details = React.memo(() => {
 
-  const [country, setCountry] = useState<ResponseCountryType | null>(null)
+  const country = useAppSelector(state => state.reducer.country)
 
   const navigate = useNavigate()
   const params = useParams<'name'>()
+  const dispatch = useAppDispatch()
   const name = params.name
 
-  useEffect(() => {
-    axios.get(searchByCountry(name))
-      .then(( data ) => {
-        setCountry(data.data[0])
-      })
-  }, [name])
+  useEffect(()=>{
+    dispatch(searchByCountryAction(name))
+  },[dispatch, name])
 
   const handleOnClick = () => navigate('/')
 
@@ -29,7 +26,7 @@ export const Details = React.memo(() => {
       <Button onClick={handleOnClick}>
         <IoArrowBack/> Back
       </Button>
-      {country && <DetailItem country={country}/>}
+      {country && <DetailItem />}
     </div>
   );
 });

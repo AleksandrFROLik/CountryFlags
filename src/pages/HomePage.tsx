@@ -1,30 +1,26 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { flagsCountriesAPI } from 'api/flagsCountriesAPI';
-import { Controls, RegionType } from 'components/Controls';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { fetchFlagsCountries } from '../store/actions/flagsCountryAction';
 import { List } from 'components/List';
 import { Card } from 'components/Card';
+import { Controls, RegionType } from 'components/Controls';
 import { ResponseGetFlagsType } from '../models/models';
 
-type HomePageType = {
-  countries: ResponseGetFlagsType[]
-  setCountries: (countries: ResponseGetFlagsType[]) => void
-}
 
-export const HomePage = React.memo(({countries, setCountries}: HomePageType) => {
+export const HomePage = React.memo(() => {
+
+  const countries = useAppSelector(state => state.reducer.flagsCountries)
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[]>(countries)
-  const navigate = useNavigate()
 
   useEffect(() => {
     if (!countries.length) {
-      flagsCountriesAPI.getFlags()
-                       .then((data) => {
-                         setCountries(data.data)
-                         setFilteredCountries(data.data)
-                       })
+      dispatch(fetchFlagsCountries())
     }
-  }, [countries.length])
+  }, [dispatch, countries])
 
 
   const handleSearch = useCallback((search: string, region: RegionType | null) => {
@@ -34,7 +30,7 @@ export const HomePage = React.memo(({countries, setCountries}: HomePageType) => 
     if (search) data = data.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))
 
     setFilteredCountries(data)
-  },[setFilteredCountries, countries])
+  }, [setFilteredCountries, countries])
 
   const navigateToDetails = (name: string) => navigate(`/country/${name}`)
 

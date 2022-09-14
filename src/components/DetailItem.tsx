@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { filterByCode } from 'config';
 import { useNavigate } from 'react-router-dom';
 import { ResponseCountryType } from '../models/models';
+import { useAppSelector } from '../hooks/reduxHooks';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -87,18 +88,15 @@ const Tag = styled.span`
   line-height: 1.5;
   cursor: pointer;
 `;
-type DetailItemType = {
-  country: ResponseCountryType | null
-}
 
-export const DetailItem = ({country}: DetailItemType) => {
-
+export const DetailItem = () => {
+  const country = useAppSelector(state => state.reducer.country)
   const [neighbors, setNeighbors] = useState<string[]>([])
   const navigate = useNavigate()
 
   useEffect(() => {
     if (country?.borders?.length)
-      axios.get<Array<ResponseCountryType>>(filterByCode(country?.borders))
+      axios.get<ResponseCountryType[]>(filterByCode(country?.borders))
            .then((data) => setNeighbors(data.data.map(country => country.name)))
   }, [country?.borders])
 

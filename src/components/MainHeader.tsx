@@ -36,7 +36,7 @@ const ModeSwitcher = styled.div`
 
 export const MainHeader = () => {
 
-  const [theme, setTheme] = useState( 'light' );
+  const [theme, setTheme] = useState( 'dark' );
   const navigate = useNavigate();
   const toggleTheme = () => setTheme( theme === 'light' ? 'dark' : 'light' );
 

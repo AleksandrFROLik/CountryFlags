@@ -4,18 +4,22 @@ import { ResponseCountryType, ResponseGetFlagsType } from '../../models/models';
 type FlagType = {
   loading: boolean,
   flagsCountries: ResponseGetFlagsType[],
-  country: ResponseCountryType[],
+  country: ResponseCountryType | null,
   error: string
 }
 
 type FlagsPayload = {
-  flagsCountries: ResponseGetFlagsType[]
+  flagsCountries: ResponseGetFlagsType[],
+}
+
+type CountryPayload = {
+  country: ResponseCountryType | null
 }
 
 const initialState: FlagType = {
   loading: false,
   flagsCountries: [],
-  country: [],
+  country: null,
   error: ''
 }
 
@@ -29,7 +33,12 @@ export const flagsSlice = createSlice({
     },
     fetchSuccess(state, action: PayloadAction<FlagsPayload>) {
       state.loading = false
+      state.flagsCountries = action.payload.flagsCountries
+
       state.error = ''
+    },
+    fetchSearch(state, action: PayloadAction<CountryPayload>) {
+      state.country = action.payload.country
     },
     fetchError(state, action: PayloadAction<Error>) {
       state.loading = false
@@ -38,5 +47,5 @@ export const flagsSlice = createSlice({
   }
 })
 
-export const {} = flagsSlice.actions
+
 export default flagsSlice.reducer
