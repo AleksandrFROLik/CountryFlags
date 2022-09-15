@@ -3,42 +3,50 @@ import { ResponseCountryType, ResponseGetFlagsType } from '../../models/models';
 
 type FlagType = {
   loading: boolean,
-  flagsCountries: ResponseGetFlagsType[],
+  flagsCountry: ResponseGetFlagsType[],
   country: ResponseCountryType | null,
+  countryBorders: string[],
   error: string
 }
 
 type FlagsPayload = {
-  flagsCountries: ResponseGetFlagsType[],
+  flagsCountry: ResponseGetFlagsType[],
 }
 
 type CountryPayload = {
   country: ResponseCountryType | null
 }
 
+type countryBordersPayload = {
+  countryBorders: string[]
+}
+
 const initialState: FlagType = {
   loading: false,
-  flagsCountries: [],
+  flagsCountry: [],
   country: null,
+  countryBorders: [],
   error: ''
 }
 
 
-export const flagsSlice = createSlice({
-  name: 'flags',
+export const flagCountryAppSlice = createSlice({
+  name: 'flagCountryApp',
   initialState,
   reducers: {
     fetching(state) {
       state.loading = true
     },
-    fetchSuccess(state, action: PayloadAction<FlagsPayload>) {
+    fetchGetFlagsCountry(state, action: PayloadAction<FlagsPayload>) {
       state.loading = false
-      state.flagsCountries = action.payload.flagsCountries
-
+      state.flagsCountry = action.payload.flagsCountry
       state.error = ''
     },
     fetchSearch(state, action: PayloadAction<CountryPayload>) {
       state.country = action.payload.country
+    },
+    fetchCountryBorders(state, action: PayloadAction<countryBordersPayload>) {
+      state.countryBorders = action.payload.countryBorders
     },
     fetchError(state, action: PayloadAction<Error>) {
       state.loading = false
@@ -48,4 +56,4 @@ export const flagsSlice = createSlice({
 })
 
 
-export default flagsSlice.reducer
+export default flagCountryAppSlice.reducer

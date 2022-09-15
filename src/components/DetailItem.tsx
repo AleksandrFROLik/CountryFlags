@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import { filterByCode } from 'config';
 import { useNavigate } from 'react-router-dom';
-import { ResponseCountryType } from '../models/models';
-import { useAppSelector } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { filterByCodeAction } from '../store/actions/countryBorderAction';
+import { NotFound } from '../pages/NotFound';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -90,17 +89,21 @@ const Tag = styled.span`
 `;
 
 export const DetailItem = () => {
+
+
   const country = useAppSelector(state => state.reducer.country)
-  const [neighbors, setNeighbors] = useState<string[]>([])
+  const countryBorders = useAppSelector(state => state.reducer.countryBorders)
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (country?.borders?.length)
-      axios.get<ResponseCountryType[]>(filterByCode(country?.borders))
-           .then((data) => setNeighbors(data.data.map(country => country.name)))
-  }, [country?.borders])
+  useEffect(()=>{
+    if (country?.borders?.length) {
+      dispatch(filterByCodeAction(country?.borders))
+    }
+  },[dispatch, country?.borders])
 
   return (
+
     <Wrapper>
       <ItemImage src={country?.flag}/>
       <div>
@@ -144,11 +147,11 @@ export const DetailItem = () => {
             <span>There is not border countries</span>
           ) : (
             <TagGroup>
-              {neighbors && neighbors.map(neighbor => (
-                <Tag key={neighbor}
-                     onClick={() => navigate(`/country/${neighbor}`)}>
-                  {neighbor}
-                </Tag>))}
+          {countryBorders && countryBorders.map(countryBorder => (
+            <Tag key={countryBorder}
+            onClick={() => navigate(`/country/${countryBorder}`)}>
+          {countryBorder}
+            </Tag>))}
             </TagGroup>
           )}
         </Meta>

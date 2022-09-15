@@ -10,27 +10,27 @@ import { ResponseGetFlagsType } from '../models/models';
 
 export const HomePage = React.memo(() => {
 
-  const countries = useAppSelector(state => state.reducer.flagsCountries)
+  const flagsCountry = useAppSelector(state => state.reducer.flagsCountry)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[]>(countries)
+  const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[]>(flagsCountry)
 
   useEffect(() => {
-    if (!countries.length) {
+    if (!flagsCountry.length) {
       dispatch(fetchFlagsCountries())
     }
-  }, [dispatch, countries])
+  }, [dispatch, flagsCountry])
 
 
   const handleSearch = useCallback((search: string, region: RegionType | null) => {
-    let data = [...countries];
+    let data = [...flagsCountry];
 
     if (region) data = data.filter(c => c.region.includes(region.value))
     if (search) data = data.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))
 
     setFilteredCountries(data)
-  }, [setFilteredCountries, countries])
+  }, [setFilteredCountries, flagsCountry])
 
   const navigateToDetails = (name: string) => navigate(`/country/${name}`)
 

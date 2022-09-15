@@ -6,10 +6,10 @@ import { DetailItem } from 'components/DetailItem';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { searchByCountryAction } from '../store/actions/searchByCountryAction';
 
+
 export const Details = React.memo(() => {
 
   const country = useAppSelector(state => state.reducer.country)
-
   const navigate = useNavigate()
   const params = useParams<'name'>()
   const dispatch = useAppDispatch()
