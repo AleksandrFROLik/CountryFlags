@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { filterByCodeAction } from '../store/actions/countryBorderAction';
-import { NotFound } from '../pages/NotFound';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -88,8 +88,7 @@ const Tag = styled.span`
   cursor: pointer;
 `;
 
-export const DetailItem = () => {
-
+export const DetailItem = React.memo(() => {
 
   const country = useAppSelector(state => state.reducer.country)
   const countryBorders = useAppSelector(state => state.reducer.countryBorders)
@@ -158,4 +157,4 @@ export const DetailItem = () => {
       </div>
     </Wrapper>
   )
-}
+})

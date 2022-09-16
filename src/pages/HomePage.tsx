@@ -6,22 +6,25 @@ import { List } from 'components/List';
 import { Card } from 'components/Card';
 import { Controls, RegionType } from 'components/Controls';
 import { ResponseGetFlagsType } from '../models/models';
+import { NotFound } from './NotFound';
 
 
 export const HomePage = React.memo(() => {
 
   const flagsCountry = useAppSelector(state => state.reducer.flagsCountry)
+  const error = useAppSelector(state => state.reducer.error)
+  const isLoading = useAppSelector(state => state.reducer.loading)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-
+  console.log(isLoading)
   const [filteredCountries, setFilteredCountries] = useState<ResponseGetFlagsType[]>(flagsCountry)
 
   useEffect(() => {
+
     if (!flagsCountry.length) {
       dispatch(fetchFlagsCountries())
     }
   }, [dispatch, flagsCountry])
-
 
   const handleSearch = useCallback((search: string, region: RegionType | null) => {
     let data = [...flagsCountry];
@@ -36,6 +39,7 @@ export const HomePage = React.memo(() => {
 
   return (
     <>
+      {isLoading && <p>Wait a minute</p>}
       <Controls onSearch={handleSearch}/>
       <List>
         {filteredCountries.map(country => {
