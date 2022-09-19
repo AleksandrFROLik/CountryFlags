@@ -95,11 +95,11 @@ export const DetailItem = React.memo(() => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  useEffect(()=>{
+  useEffect(() => {
     if (country?.borders?.length) {
       dispatch(filterByCodeAction(country?.borders))
     }
-  },[dispatch, country?.borders])
+  }, [dispatch, country?.borders])
 
   return (
 
@@ -146,11 +146,11 @@ export const DetailItem = React.memo(() => {
             <span>There is not border countries</span>
           ) : (
             <TagGroup>
-          {countryBorders && countryBorders.map(countryBorder => (
-            <Tag key={countryBorder}
-            onClick={() => navigate(`/country/${countryBorder}`)}>
-          {countryBorder}
-            </Tag>))}
+              {countryBorders && countryBorders.map(countryBorder => (
+                <Tag key={countryBorder}
+                     onClick={() => navigate(`/country/${countryBorder}`)}>
+                  {countryBorder}
+                </Tag>))}
             </TagGroup>
           )}
         </Meta>
