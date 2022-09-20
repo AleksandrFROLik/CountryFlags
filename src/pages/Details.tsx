@@ -15,9 +15,9 @@ export const Details = React.memo(() => {
   const dispatch = useAppDispatch()
   const name = params.name
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(searchByCountryAction(name))
-  },[dispatch, name])
+  }, [dispatch, name])
 
   const handleOnClick = () => navigate('/')
 
@@ -26,7 +26,7 @@ export const Details = React.memo(() => {
       <Button onClick={handleOnClick}>
         <IoArrowBack/> Back
       </Button>
-      {country && <DetailItem />}
+      {country && <DetailItem/>}
     </div>
   );
 });
