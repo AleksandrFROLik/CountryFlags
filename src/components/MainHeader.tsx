@@ -17,9 +17,9 @@ const Wrapper = styled.div`
 
 `;
 
-const Title = styled( Link ).attrs( {
+const Title = styled(Link).attrs({
   to: '/',
-} )`
+})`
   color: var(--color-text);
   font-size: var(--fs-sm);
   text-decoration: none;
@@ -36,13 +36,13 @@ const ModeSwitcher = styled.div`
 
 export const MainHeader = () => {
 
-  const [theme, setTheme] = useState( 'dark' );
+  const [theme, setTheme] = useState('dark');
   const navigate = useNavigate();
-  const toggleTheme = () => setTheme( theme === 'light' ? 'dark' : 'light' );
+  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
-  useEffect( () => {
-    document.body.setAttribute( 'data-theme', theme )
-  }, [theme] );
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme)
+  }, [theme]);
 
   const backToMain = () => {
     navigate('/')
@@ -56,7 +56,7 @@ export const MainHeader = () => {
           <ModeSwitcher onClick={toggleTheme}>
             {theme === 'light' && <IoMoonOutline/>}
             {theme === 'dark' && <IoMoon size="14px"/>}
-            <span style={{ marginLeft: '0.75rem' }}>{theme} Theme</span>
+            <span style={{marginLeft: '0.75rem'}}>{theme} Theme</span>
           </ModeSwitcher>
         </Wrapper>
       </Container>
