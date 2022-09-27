@@ -8,15 +8,12 @@ import { useAppSelector } from './hooks/reduxHooks';
 import React from 'react';
 
 const App = () => {
-
-  const isLoading = useAppSelector(state => state.reducer.loading)
   const error = useAppSelector(state => state.reducer.error)
 
   return (
     <>
       <MainHeader/>
       <Main>
-        {isLoading && <p>Wait a minute</p>}
         {error === '' &&
         <Routes>
             <Route path="/"
