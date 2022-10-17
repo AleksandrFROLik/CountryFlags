@@ -1,7 +1,7 @@
 import { AppDispatch } from '../index';
 import { flagCountryAppSlice } from '../slices/flagSlices';
 import { instance } from '../../api/flagsCountriesAPI';
-import { ResponseCountryType} from '../../models/models';
+import { ResponseCountryType } from '../../models/models';
 import { searchByCountry } from '../../config';
 
 
