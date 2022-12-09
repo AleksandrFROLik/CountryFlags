@@ -52,22 +52,18 @@ type CardType = {
   handleOnClick: (name: string) => void
 }
 
-export const Card = ({countryInfo, handleOnClick}: CardType) => {
+export const Card = ({ countryInfo, handleOnClick }: CardType) => {
 
-  return (
-    <Wrapper onClick={() => handleOnClick(countryInfo.name)}>
-      <CardImage src={countryInfo.img} alt={countryInfo.name}/>
+  return (<Wrapper onClick={ () => handleOnClick(countryInfo.name) }>
+      <CardImage src={ countryInfo.img } alt={ countryInfo.name }/>
       <CardBody>
-        <CardTitle>{countryInfo.name}</CardTitle>
+        <CardTitle>{ countryInfo.name }</CardTitle>
         <CardList>
-          {countryInfo.info.map(info => (
-            <CardListItem key={info.title}>
-              <b>{info.title}:</b>{info.description}
-            </CardListItem>
-          ))}
+          { countryInfo.info.map(info => (<CardListItem key={ info.title }>
+              <b>{ info.title }:</b>{ info.description }
+            </CardListItem>)) }
         </CardList>
       </CardBody>
-    </Wrapper>
-  );
+    </Wrapper>);
 };
 
