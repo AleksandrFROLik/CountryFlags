@@ -28,7 +28,7 @@ type ControlsType = {
 
 export type RegionType = {
   value: string,
-  label: string
+  label: string,
 }
 
 export const Controls = React.memo(({onSearch}: ControlsType) => {
